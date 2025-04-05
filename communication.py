@@ -1,5 +1,5 @@
 from serial import Serial, SerialException, serialutil
-#import command_parser
+import command_parser
 debug = True
 
 
@@ -28,7 +28,8 @@ class SerialCommunication:
         if debug:
             print(f"Input string {input_message}")
             print(f"Converted byte message : {byte_converted_message}")
+        return command_parser.output
 
     def serial_read(self) -> bytes:
         self.serial.read_until(expected=serialutil.CR)  
-        #return bin(command_parser.RETURN_COMMAND_TEST, encoding="utf-8")
+        #return bin(command_parser.RETURN_COMMAND_TEST, encoding="utf-8")   ????? should serial read not return the command response from command parser?
