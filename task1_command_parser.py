@@ -2,12 +2,13 @@ import binascii
 
 
 class CommandParser:
-
+    """Parser class for first task."""
     DEFAULT_MAP = 0b0000001100000011
     response_OK = "OK"
     response_NOK = "NOK"
 
     def parse_request(self, request_type: str, register_value: str = DEFAULT_MAP, device_address: str = "22"):
+        """Forms the request for write or read"""
         default_command = "ES+"
         if request_type == "W":
             command_string = default_command + device_address + "00" + register_value + " "
@@ -21,6 +22,7 @@ class CommandParser:
             return command_string
 
     def validate_response(self, command: str,  str_msg: str):
+        """Validates the response to the request, prints a message about the mode and returns OK/NOK"""
         if "OK+C3C3" in str_msg:
             print("From BL to APP")
             return self.response_NOK
